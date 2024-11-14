@@ -5,6 +5,7 @@
       <sourceFolder url="file://$MODULE_DIR$/posts_service" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/user_interface_service" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/users_service" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/ubuntu_venv" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
     <orderEntry type="inheritedJdk" />
