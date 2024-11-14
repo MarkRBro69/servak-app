@@ -1,0 +1,47 @@
+<!--Shows notification detail-->
+
+<!--Params:-->
+<!--    title-->
+<!--    notification-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification Details</title>
+    <style>
+        .notification-card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            max-width: 500px;
+            margin: 20px auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .notification-card h2 {
+            margin-top: 0;
+        }
+        .notification-card p {
+            margin: 5px 0;
+        }
+        .notification-label {
+            font-weight: bold;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<div class="notification-card">
+    <h2>Notification Details</h2>
+    <p><span class="notification-label">User ID:</span> {{ notification.user_id }}</p>
+    <p><span class="notification-label">Message:</span> {{ notification.message }}</p>
+    <p><span class="notification-label">Type:</span> {{ notification.type }}</p>
+    <p><span class="notification-label">Status:</span> {{ notification.status }}</p>
+    <p><span class="notification-label">Created At:</span> {{ notification.created_at|date:"Y-m-d H:i:s" }}</p>
+    <p><span class="notification-label">Updated At:</span> {{ notification.updated_at|date:"Y-m-d H:i:s" }}</p>
+</div>
+
+</body>
+</html>

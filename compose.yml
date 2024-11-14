@@ -1,0 +1,62 @@
+services:
+  user_interface_service:
+    volumes:
+      - static:/static
+    build:
+      context: ./user_interface_service
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    environment:
+      - RUNNING_IN_DOCKER=true
+    depends_on:
+      - redis
+
+  users_service:
+    volumes:
+      - static:/static
+    build:
+      context: ./users_service
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8002"
+    environment:
+      - RUNNING_IN_DOCKER=true
+    depends_on:
+      - redis
+
+  posts_service:
+    volumes:
+      - static:/static
+    build:
+      context: ./posts_service
+      dockerfile: Dockerfile
+    ports:
+      - "8003:8003"
+    environment:
+      - RUNNING_IN_DOCKER=true
+    depends_on:
+      - redis
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    volumes:
+      - static:/static
+    ports:
+      - "80:80"
+    depends_on:
+      - users_service
+      - posts_service
+
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  static:
+  redis_data:

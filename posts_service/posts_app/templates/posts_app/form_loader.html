@@ -1,0 +1,22 @@
+<!--Params:-->
+<!--  form-->
+<!--  button_name-->
+
+{% if form.errors %}
+    <div class="errors">
+        <p>Errors found:</p>
+        <ul>
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <li>{{ field.label }}: {{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{{ button_name }}</button>
+</form>

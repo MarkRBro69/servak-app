@@ -1,0 +1,10 @@
+<!--Params:-->
+<!--  form-->
+<!--  button_name-->
+
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{{ button_name }}</button>
+</form>

@@ -1,0 +1,25 @@
+<!--Params:-->
+<!--  form-->
+<!--  button_name-->
+<!--  post_id-->
+<!--  comment_id if have a parent comment-->
+
+{% if form.errors %}
+    <div class="errors">
+        <p>Errors found:</p>
+        <ul>
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <li>{{ field.label }}: {{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+<form action="{% url 'update_comment' post_id=post_id comment_id=comment_id %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="hidden" name="parent_comment_id" value="{{ parent_comment_id }}">
+    <button type="submit">Update</button>
+</form>

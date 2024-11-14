@@ -1,0 +1,28 @@
+# pv-media.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: media-pv
+  namespace: servak-app
+spec:
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 1Gi
+  storageClassName: manual
+  hostPath:
+    path: "/mnt/data/media"
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: media-pvc
+  namespace: servak-app
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: manual
+  resources:
+    requests:
+      storage: 1Gi

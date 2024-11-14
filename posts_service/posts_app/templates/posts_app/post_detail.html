@@ -1,0 +1,82 @@
+<!--Shows post detail-->
+
+<!--Params:-->
+<!--    title-->
+<!--    post-->
+<!--    comments-->
+<!--    button_name-->
+
+{% extends 'posts_app/base.html' %}
+
+{% load custom_tags %}
+
+{% block content %}
+
+    {% user_desktop_url as udu %}
+
+    <h1>{{ post.title }}</h1>
+    <p><strong>Author:</strong> <a href="{% user_profile_url post.author_id %}">{{ post.author_id }}</a></p>
+    <p><strong>Content:</strong> {{ post.content }}</p>
+    <p><strong>Create Date:</strong> {{ post.create_time }}</p>
+    <p><strong>Update Date:</strong> {{ post.update_time }}</p>
+    <p><strong>Published:</strong> {{ post.published }}</p>
+    <p><strong>Likes:</strong> {{ post.like_count }}</p>
+
+    <h2>Image:</h2>
+    <div id="imageContainer">
+        {% if post.image %}
+            <img id="postImage" src="{{ post.image.url }}" alt="Post Image" style="max-width: 100%; height: auto;">
+        {% else %}
+            <p>No image available.</p>
+        {% endif %}
+    </div>
+
+
+    <h2>Comments</h2>
+    <ul>
+        {% for comment in comments %}
+            <li>{{ comment.author_id }} - <a href="{% url 'comment_detail' post.pk comment.pk %}">{{ comment.content }}</a> - {{ comment.create_time }}</li>
+        {% empty %}
+            <li>No comments yet.</li>
+        {% endfor %}
+    </ul>
+
+    {% include 'posts_app/create_comment_form.html' with post_id=post.id form=form %}
+
+    {% if auth_user_id == post.author_id %}
+        <p><a href="{% url 'update_post' post.id %}" class="btn">Update post</a></p>
+        <button type="button" onclick="deletePost({{ post.id }})">Delete post</button>
+    {% else %}
+        <p>No permission to update.</p>
+    {% endif %}
+
+<script>
+    function deletePost(postId) {
+        if (confirm('Are you sure you want to delete this post?')) {
+            fetch(`/api/pst/${postId}/delete/`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+            })
+            .then(response => {
+                if (response.ok) {
+                    if (response.status === 204) {
+                        alert('Post deleted successfully.');
+                        window.location.href = window.location.origin + '{{ udu }}'
+                    } else {
+                        return response.json().then(data => {
+                            alert(`Post deleted, server returned: ${data.message}`);
+                        });
+                    }
+                } else {
+                    return response.json().then(data => {
+                        alert(`Error: ${data.detail || 'Failed to delete post.'}`);
+                    });
+                }
+            })
+        }
+    }
+</script>
+
+{% endblock %}

@@ -1,0 +1,700 @@
+Internal Server Error: /api/usr/login
+Traceback (most recent call last):
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/django/utils/deprecation.py", line 131, in __call__
+    response = self.process_response(request, response)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8001/api/usr/login/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+Internal Server Error: /api/usr/login/
+Traceback (most recent call last):
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/urllib3/connection.py", line 199, in _new_conn
+    sock = connection.create_connection(
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 789, in urlopen
+    response = self._make_request(
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 495, in _make_request
+    conn.request(
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/urllib3/connection.py", line 441, in request
+    self.endheaders()
+  File "/usr/lib/python3.10/http/client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.10/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.10/http/client.py", line 976, in send
+    self.connect()
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/urllib3/connection.py", line 279, in connect
+    self.sock = self._new_conn()
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/urllib3/connection.py", line 214, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7f5f9142da20>: Failed to establish a new connection: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 843, in urlopen
+    retries = retries.increment(
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.2', port=8002): Max retries exceeded with url: /api/usr/login/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5f9142da20>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/user_interface_service/user_interface/views.py", line 31, in proxy_to_users_service
+    response = proxy_request(request, service_url, headers, cookies, params)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/user_interface_service/user_interface/views.py", line 110, in proxy_request
+    response = requests.get(service_url, headers=headers, cookies=cookies, params=params,
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.2', port=8002): Max retries exceeded with url: /api/usr/login/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5f9142da20>: Failed to establish a new connection: [Errno 111] Connection refused'))
+Internal Server Error: /api/usr/login/
+Internal Server Error: /api/usr/
+Internal Server Error: /api/usr/login/
+Internal Server Error: /api/token/
+Traceback (most recent call last):
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/user_interface_service/user_interface/views.py", line 31, in proxy_to_users_service
+    response = proxy_request(request, service_url, headers, cookies, params)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/user_interface_service/user_interface/views.py", line 110, in proxy_request
+    response = requests.get(service_url, headers=headers, cookies=cookies, params=params,
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/sessions.py", line 575, in request
+    prep = self.prepare_request(req)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/sessions.py", line 484, in prepare_request
+    p.prepare(
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/models.py", line 367, in prepare
+    self.prepare_url(url, params)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/models.py", line 444, in prepare_url
+    raise InvalidURL(f"Invalid URL {url!r}: No host supplied")
+requests.exceptions.InvalidURL: Invalid URL 'http:///api/token/': No host supplied
+Internal Server Error: /api/token/
+Traceback (most recent call last):
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/user_interface_service/user_interface/views.py", line 31, in proxy_to_users_service
+    response = proxy_request(request, service_url, headers, cookies, params)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/user_interface_service/user_interface/views.py", line 110, in proxy_request
+    response = requests.get(service_url, headers=headers, cookies=cookies, params=params,
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/sessions.py", line 575, in request
+    prep = self.prepare_request(req)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/sessions.py", line 484, in prepare_request
+    p.prepare(
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/models.py", line 367, in prepare
+    self.prepare_url(url, params)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/models.py", line 444, in prepare_url
+    raise InvalidURL(f"Invalid URL {url!r}: No host supplied")
+requests.exceptions.InvalidURL: Invalid URL 'http:///api/token/': No host supplied
+Internal Server Error: /api/token/
+Traceback (most recent call last):
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/user_interface_service/user_interface/views.py", line 31, in proxy_to_users_service
+    response = proxy_request(request, service_url, headers, cookies, params)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/user_interface_service/user_interface/views.py", line 110, in proxy_request
+    response = requests.get(service_url, headers=headers, cookies=cookies, params=params,
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/sessions.py", line 575, in request
+    prep = self.prepare_request(req)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/sessions.py", line 484, in prepare_request
+    p.prepare(
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/models.py", line 367, in prepare
+    self.prepare_url(url, params)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/models.py", line 444, in prepare_url
+    raise InvalidURL(f"Invalid URL {url!r}: No host supplied")
+requests.exceptions.InvalidURL: Invalid URL 'http:///api/token/': No host supplied
+Internal Server Error: /api/usr/login/
+Traceback (most recent call last):
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/urllib3/connection.py", line 199, in _new_conn
+    sock = connection.create_connection(
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 789, in urlopen
+    response = self._make_request(
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 495, in _make_request
+    conn.request(
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/urllib3/connection.py", line 441, in request
+    self.endheaders()
+  File "/usr/lib/python3.10/http/client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.10/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.10/http/client.py", line 976, in send
+    self.connect()
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/urllib3/connection.py", line 279, in connect
+    self.sock = self._new_conn()
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/urllib3/connection.py", line 214, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7f5f912401f0>: Failed to establish a new connection: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 843, in urlopen
+    retries = retries.increment(
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.2', port=8002): Max retries exceeded with url: /api/usr/login/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5f912401f0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/user_interface_service/user_interface/views.py", line 31, in proxy_to_users_service
+    response = proxy_request(request, service_url, headers, cookies, params)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/user_interface_service/user_interface/views.py", line 110, in proxy_request
+    response = requests.get(service_url, headers=headers, cookies=cookies, params=params,
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.2', port=8002): Max retries exceeded with url: /api/usr/login/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5f912401f0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+Internal Server Error: /api/usr/login/
+Traceback (most recent call last):
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/urllib3/connection.py", line 199, in _new_conn
+    sock = connection.create_connection(
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 789, in urlopen
+    response = self._make_request(
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 495, in _make_request
+    conn.request(
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/urllib3/connection.py", line 441, in request
+    self.endheaders()
+  File "/usr/lib/python3.10/http/client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.10/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.10/http/client.py", line 976, in send
+    self.connect()
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/urllib3/connection.py", line 279, in connect
+    self.sock = self._new_conn()
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/urllib3/connection.py", line 214, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7f5f90fb6ec0>: Failed to establish a new connection: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 843, in urlopen
+    retries = retries.increment(
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.2', port=8002): Max retries exceeded with url: /api/usr/login/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5f90fb6ec0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/user_interface_service/user_interface/views.py", line 31, in proxy_to_users_service
+    response = proxy_request(request, service_url, headers, cookies, params)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/user_interface_service/user_interface/views.py", line 110, in proxy_request
+    response = requests.get(service_url, headers=headers, cookies=cookies, params=params,
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/mnt/c/users/admin/desktop/pycharmprojects/django_projects/servak/ubuntu_venv/lib/python3.10/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.2', port=8002): Max retries exceeded with url: /api/usr/login/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5f90fb6ec0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+Internal Server Error: /api/usr/login/
+Internal Server Error: /api/usr/login/
+Internal Server Error: /api/pst/post/
+Traceback (most recent call last):
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\connection.py", line 199, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\connectionpool.py", line 789, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\connectionpool.py", line 495, in _make_request
+    conn.request(
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\connection.py", line 441, in request
+    self.endheaders()
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 1038, in _send_output
+    self.send(msg)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 976, in send
+    self.connect()
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\connection.py", line 279, in connect
+    self.sock = self._new_conn()
+                ^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\connection.py", line 214, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x00000223C5DA3250>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\requests\adapters.py", line 667, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\connectionpool.py", line 843, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\util\retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.3', port=8003): Max retries exceeded with url: /api/pst/post/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000223C5DA3250>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\user_interface_service\user_interface\views.py", line 31, in proxy_to_users_service
+    response = proxy_request(request, service_url, headers, cookies, params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\user_interface_service\user_interface\views.py", line 110, in proxy_request
+    response = requests.get(service_url, headers=headers, cookies=cookies, params=params,
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\requests\api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\requests\adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.3', port=8003): Max retries exceeded with url: /api/pst/post/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000223C5DA3250>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение'))
+Invalid HTTP_HOST header: 'localhost:8001'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\django\utils\deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\django\http\request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8001'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Invalid HTTP_HOST header: 'localhost:8001'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\django\utils\deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\django\http\request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8001'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Invalid HTTP_HOST header: 'localhost:8001'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\django\utils\deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\django\http\request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8001'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Internal Server Error: /api/usr/desktop/
+"GET /api/usr/desktop/ HTTP/1.1" 500 159261
+Internal Server Error: /api/usr/desktop/
+"GET /api/usr/desktop/ HTTP/1.1" 500 159275
+Internal Server Error: /api/usr/desktop/
+"GET /api/usr/desktop/ HTTP/1.1" 500 159268
+Invalid HTTP_HOST header: 'localhost:8001'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\django\utils\deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\django\http\request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8001'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Invalid HTTP_HOST header: 'localhost:8001'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\django\utils\deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\django\http\request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8001'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Internal Server Error: /api/usr/profile/1/update/
+"GET /api/usr/profile/1/update/ HTTP/1.1" 500 140155
+Internal Server Error: /api/usr/logout/
+Traceback (most recent call last):
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\connection.py", line 199, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\connectionpool.py", line 789, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\connectionpool.py", line 495, in _make_request
+    conn.request(
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\connection.py", line 441, in request
+    self.endheaders()
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 1038, in _send_output
+    self.send(msg)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 976, in send
+    self.connect()
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\connection.py", line 279, in connect
+    self.sock = self._new_conn()
+                ^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\connection.py", line 214, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x00000295222DDC90>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\requests\adapters.py", line 667, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\connectionpool.py", line 843, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\util\retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.2', port=8002): Max retries exceeded with url: /api/usr/logout/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000295222DDC90>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\user_interface_service\user_interface\views.py", line 31, in proxy_to_users_service
+    response = proxy_request(request, service_url, headers, cookies, params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\user_interface_service\user_interface\views.py", line 117, in proxy_request
+    response = requests.post(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\requests\adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.2', port=8002): Max retries exceeded with url: /api/usr/logout/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000295222DDC90>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение'))
+"POST /api/usr/logout/ HTTP/1.1" 500 240915
+Internal Server Error: /api/usr/profile/1/update/
+"GET /api/usr/profile/1/update/ HTTP/1.1" 500 140155
+Internal Server Error: /api/usr/logout/
+Traceback (most recent call last):
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\connection.py", line 199, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\connectionpool.py", line 789, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\connectionpool.py", line 495, in _make_request
+    conn.request(
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\connection.py", line 441, in request
+    self.endheaders()
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 1038, in _send_output
+    self.send(msg)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 976, in send
+    self.connect()
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\connection.py", line 279, in connect
+    self.sock = self._new_conn()
+                ^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\connection.py", line 214, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x00000295221865D0>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\requests\adapters.py", line 667, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\connectionpool.py", line 843, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\util\retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.2', port=8002): Max retries exceeded with url: /api/usr/logout/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000295221865D0>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\user_interface_service\user_interface\views.py", line 31, in proxy_to_users_service
+    response = proxy_request(request, service_url, headers, cookies, params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\user_interface_service\user_interface\views.py", line 117, in proxy_request
+    response = requests.post(
+               ^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\requests\adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.2', port=8002): Max retries exceeded with url: /api/usr/logout/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000295221865D0>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение'))
+"POST /api/usr/logout/ HTTP/1.1" 500 240915
+Internal Server Error: /api/pst/post/
+"POST /api/pst/post/ HTTP/1.1" 500 145067
+Internal Server Error: /api/pst/post/
+"POST /api/pst/post/ HTTP/1.1" 500 145066
+Internal Server Error: /api/pst/post/
+"POST /api/pst/post/ HTTP/1.1" 500 145068
+Internal Server Error: /api/usr/profile/3/
+Traceback (most recent call last):
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\connectionpool.py", line 789, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\connection.py", line 507, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 1375, in getresponse
+    response.begin()
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 318, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 279, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python311\Lib\socket.py", line 706, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [WinError 10054] Удаленный хост принудительно разорвал существующее подключение
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\requests\adapters.py", line 667, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\connectionpool.py", line 843, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\util\retry.py", line 474, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\util\util.py", line 38, in reraise
+    raise value.with_traceback(tb)
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\connectionpool.py", line 789, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\urllib3\connection.py", line 507, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 1375, in getresponse
+    response.begin()
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 318, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 279, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python311\Lib\socket.py", line 706, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.ProtocolError: ('Connection aborted.', ConnectionResetError(10054, 'Удаленный хост принудительно разорвал существующее подключение', None, 10054, None))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\user_interface_service\user_interface\views.py", line 31, in proxy_to_users_service
+    response = proxy_request(request, service_url, headers, cookies, params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\user_interface_service\user_interface\views.py", line 110, in proxy_request
+    response = requests.get(service_url, headers=headers, cookies=cookies, params=params,
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\requests\api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Desktop\PyCharmProjects\django_projects\servak\venv\Lib\site-packages\requests\adapters.py", line 682, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', ConnectionResetError(10054, 'Удаленный хост принудительно разорвал существующее подключение', None, 10054, None))
+"GET /api/usr/profile/3/ HTTP/1.1" 500 249126
+Internal Server Error: /api/pst/post/
+"POST /api/pst/post/ HTTP/1.1" 500 145063
+Internal Server Error: /api/pst/post/
+"POST /api/pst/post/ HTTP/1.1" 500 145064
+Internal Server Error: /api/usr/profile/1/
+"GET /api/usr/profile/1/ HTTP/1.1" 500 276458
+Internal Server Error: /api/usr/profile/1/
+"GET /api/usr/profile/1/ HTTP/1.1" 500 300861
+Internal Server Error: /api/usr/profile/notification/672c6d54c791dd386491c269/
+"GET /api/usr/profile/notification/672c6d54c791dd386491c269/ HTTP/1.1" 500 241772

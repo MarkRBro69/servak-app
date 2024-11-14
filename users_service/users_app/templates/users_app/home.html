@@ -1,0 +1,11 @@
+<!--Home page-->
+
+<!--Params:-->
+<!--    title-->
+
+{% extends 'users_app/base.html' %}
+
+{% block content %}
+    <p><a href="{% url 'login' %}" class="btn">Login</a></p>
+    <p><a href="{% url 'register' %}" class="btn">Register</a></p>
+{% endblock %}
