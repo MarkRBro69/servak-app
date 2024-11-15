@@ -43,7 +43,7 @@ spec:
           volumeMounts:
             - mountPath: /static
               name: static-volume
-            - mountPath: /media
+            - mountPath: /app/media
               name: media-volume
       volumes:
         - name: static-volume
