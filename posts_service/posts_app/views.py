@@ -4,8 +4,6 @@ from datetime import datetime as dt
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.utils import timezone
-from django.views.decorators.csrf import csrf_exempt
-
 from kafka_moule.async_kafka_producer import produce_post_notification
 from posts_app.forms import *
 from posts_app.services import *
@@ -343,4 +341,3 @@ def delete_post_like(request, post_id):
 
     else:
         return JsonResponse({'error': f'{request.method} is unsupported '}, status=405)
-

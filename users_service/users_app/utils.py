@@ -7,7 +7,8 @@ from rest_framework_simplejwt.exceptions import TokenError, TokenBackendError
 
 from users_app.serializers import UserSerializer
 from users_app.services import UserService
-from users_service.settings import THIS_SERVICE_URL, SECRET_KEY
+from users_service.settings import SECRET_KEY
+from users_service.cluster_settings import USERS_SERVICE_URL
 
 logger = logging.getLogger('users_service')
 
@@ -49,7 +50,7 @@ def get_auth_user(request):
 
     logger.debug(f'get_auth_user: {cookies}')
 
-    url = f'http://{THIS_SERVICE_URL}/api/usr/get_authenticated_user/'
+    url = f'http://{USERS_SERVICE_URL}/api/usr/get_authenticated_user/'
     user_data = requests.get(url, cookies=cookies)
 
     logger.debug(f'get_auth_user: {user_data.status_code}')
@@ -69,4 +70,3 @@ def unpack_auth_user(response_data):
 
     else:
         return None, None, None
-

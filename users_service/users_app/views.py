@@ -10,7 +10,7 @@ from users_kafka_module.async_kafka_producer import produce_profile_notification
 from users_app.forms import *
 from users_app.services import *
 from users_app.utils import set_tokens, get_auth_user, get_user
-from users_service.settings import THIS_SERVICE_URL
+from users_service.cluster_settings import USERS_SERVICE_URL
 
 logger = logging.getLogger('users_service')
 
@@ -241,7 +241,7 @@ def get_authenticated_user(request):
             response = Response(response_data, status=200)
             return response
         else:
-            url = f'http://{THIS_SERVICE_URL}/api/token/refresh/'
+            url = f'http://{USERS_SERVICE_URL}/api/token/refresh/'
             urt = request.COOKIES.get('urt')
             data = {'refresh': urt}
 

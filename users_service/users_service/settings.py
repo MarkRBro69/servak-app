@@ -10,9 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
+import users_service.cluster_settings as cs
 from datetime import timedelta
 from pathlib import Path
 from mongoengine import connect
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,14 +28,7 @@ SECRET_KEY = 'django-insecure-nm@r_)$psz$w=3xy*qhs*!5k+-6pkym!x2+z76312p#%=(04ue
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    '127.0.0.1',
-    '127.0.0.2',
-    'localhost',
-    'users_service',
-    'posts_service',
-    'users-service.servak-app.svc.cluster.local',
-]
+ALLOWED_HOSTS = cs.ALLOWED_HOSTS
 
 # Application definition
 
@@ -89,16 +84,7 @@ WSGI_APPLICATION = 'users_service.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'servakdb',
-        'USER': 'postgres',
-        'PASSWORD': 'Qecz1357',
-        'HOST': 'postgres',
-        'PORT': '5432',
-    }
-}
+DATABASES = cs.DATABASES
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -134,6 +120,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -194,9 +183,6 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-
 
 def show_toolbar(request):
     return True
@@ -206,65 +192,15 @@ DEBUG_TOOLBAR_CONFIG = {
     "SHOW_TOOLBAR_CALLBACK": show_toolbar,
 }
 
-THIS_SERVICE_URL = 'users-service.servak-app.svc.cluster.local'
-POSTS_SERVICE_URL = '127.0.0.3:8003'
+CORS_ALLOWED_ORIGINS = cs.CORS_ALLOWED_ORIGINS
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '{levelname} {asctime} {module} {message}',
-            'style': '{',
-        },
-    },
-    'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': 'error.log',
-            'formatter': 'verbose',
-        },
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose',
-        },
-    },
-    'loggers': {
-        'users_service': {
-            'handlers': ['file', 'console'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-    },
-}
+CSRF_TRUSTED_ORIGINS = cs.CSRF_TRUSTED_ORIGINS
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost',
-    'http://localhost:8000',
-    'http://127.0.0.1',
-]
+KAFKA_BROKER_URL = cs.KAFKA_BROKER_URL
 
-CSRF_TRUSTED_ORIGINS = [
-    'http://localhost',
-    'http://localhost:8000',
-    'http://127.0.0.1',
-]
+MONGO_URI = cs.MONGO_URI
+MONGO_NAME = cs.MONGO_NAME
 
-KAFKA_BROKER_URL = "kafka-0.kafka.servak-app.svc.cluster.local:9092"
+connect(MONGO_NAME, host=MONGO_URI)
 
-MONGO_URI = 'mongodb://mongodb.servak-app.svc.cluster.local:27017/notification_db'
-
-connect('notification_db', host=MONGO_URI)
-
-CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://redis.servak-app.svc.cluster.local:6379/1',
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-            'SERIALIZER': 'django_redis.serializers.json.JSONSerializer',
-        }
-    }
-}
+CACHES = cs.CACHES

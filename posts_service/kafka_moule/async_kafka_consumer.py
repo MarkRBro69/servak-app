@@ -24,5 +24,3 @@ async def consume_profile_notifications():
 
 async def send_notification(message: str):
     logger.debug(f'Message arrived to target: {message}')
-
-    
