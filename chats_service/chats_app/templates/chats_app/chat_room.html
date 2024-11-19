@@ -1,50 +1,72 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Chat Room</title>
-</head>
-<body>
-    <h1>Chat Room</h1>
-    <div id="chat-log"></div>
-    <input id="chat-message-input" type="text" placeholder="Type a message...">
-    <button id="send-message-button">Send</button>
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Chat Room</title>
+    </head>
+    <body>
 
-    <script>
-        const roomId = {{ room_id }};
-        const chatSocket = new WebSocket(
-            'ws://' + window.location.host + '/ws/chat/' + roomId + '/'
-        );
+        <p><strong>Followers</strong></p>
+        <ul>
+            {% for f in followers %}
+                <li><a href="">{{ f.follower.user }}</a></li>
+            {% empty %}
+                <li>No followers yet</li>
+            {% endfor %}
+        </ul>
 
-        document.querySelector('#send-message-button').onclick = function(e) {
-            const messageInputDom = document.querySelector('#chat-message-input');
-            const message = messageInputDom.value;
+        <p><strong>Followings</strong></p>
+        <ul>
+            {% for f in followings %}
+                <li><a href="">{{ f.followed.user }}</a></li>
+            {% empty %}
+                <li>No followings</li>
+            {% endfor %}
+        </ul>
 
-            chatSocket.send(JSON.stringify({
-                'type': 'chat_message',
-                'message': message
-            }));
+        <h1>Chat Room</h1>
+        <div id="chat-log"></div>
+        <input id="chat-message-input" type="text" placeholder="Type a message...">
+        <button id="send-message-button">Send</button>
 
-            messageInputDom.value = '';
-        };
+        <script>
+            const roomId = "{{ room_id }}";
+            const chatSocket = new WebSocket(
+                'ws://' + window.location.host + '/ws/chat/' + roomId + '/'
+            );
+            console.log("ws://" + window.location.host + "/ws/chat/" + roomId + "/");
 
-        chatSocket.onmessage = function(e) {
-            const data = JSON.parse(e.data);
-            const message = data['message'];
+            document.querySelector('#send-message-button').onclick = function(e) {
+                const messageInputDom = document.querySelector('#chat-message-input');
+                const message = messageInputDom.value;
 
-            const messageElement = document.createElement('p');
-            messageElement.textContent = message;
-            document.querySelector('#chat-log').appendChild(messageElement);
-        };
+                chatSocket.send(JSON.stringify({
+                    'type': 'chat_message',
+                    'message': message
+                }));
+                console.log("send " + message);
 
-        chatSocket.onerror = function(e) {
-            console.error("WebSocket error: ", e);
-            alert("Error with WebSocket connection");
-        };
+                messageInputDom.value = '';
+            };
 
-        chatSocket.onclose = function(e) {
-            console.log('Chat socket closed');
-            alert("The connection was closed.");
-        };
-    </script>
-</body>
-</html>
+            chatSocket.onmessage = function(e) {
+                const data = JSON.parse(e.data);
+                const message = data['message'];
+                console.log("onmessage " + message);
+
+                const messageElement = document.createElement('p');
+                messageElement.textContent = message;
+                document.querySelector('#chat-log').appendChild(messageElement);
+            };
+
+            chatSocket.onerror = function(e) {
+                console.error("WebSocket error: ", e);
+                alert("Error with WebSocket connection");
+            };
+
+            chatSocket.onclose = function(e) {
+                console.log('Chat socket closed');
+                alert("The connection was closed.");
+            };
+        </script>
+    </body>
+    </html>

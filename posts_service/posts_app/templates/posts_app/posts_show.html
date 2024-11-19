@@ -7,6 +7,7 @@
 {% extends 'posts_app/base.html' %}
 
 {% load custom_tags %}
+{% load custom_filters %}
 
 {% block content %}
 
@@ -28,7 +29,7 @@
         {% for post in posts %}
             <tr>
                 <td>{{ post.pk }}</td>
-                <td><a href="{% user_profile_url post.author_id %}">{{ post.author_id }}</a></td>
+                <td><a href="{% user_profile_url post.author_id %}">{{ posts_users|get_item:post.pk }}</a></td>
                 <td><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></td>
                 <td>{{ post.content }}</td>
                 <td>{{ post.create_time }}</td>

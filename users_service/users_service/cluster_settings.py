@@ -68,6 +68,7 @@ ALLOWED_HOSTS = [
     'posts_service',
     'chats_service',
     'users-service.servak-app.svc.cluster.local',
+    'posts-service.servak-app.svc.cluster.local',
     'chats-service.servak-app.svc.cluster.local',
 ]
 
@@ -77,6 +78,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1',
     'http://users_service',
     'http://posts_service',
+    'http://chats_service',
     'http://posts-service.servak-app.svc.cluster.local',
 ]
 
@@ -86,6 +88,7 @@ CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1',
     'http://users_service',
     'http://posts_service',
+    'http://chats_service',
     'http://posts-service.servak-app.svc.cluster.local',
 ]
 
@@ -94,7 +97,6 @@ CHANNEL_LAYERS = {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
             "hosts": [("redis.servak-app.svc.cluster.local", 6379)],
-            "DB": 1,
         },
     },
 }

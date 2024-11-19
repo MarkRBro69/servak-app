@@ -16,5 +16,7 @@ urlpatterns = [
     path('profile/notification/<str:notification_id>/', notification_detail, name='notification_detail'),
 
     # API
-    path('get_authenticated_user/', get_authenticated_user, name='get_authenticated_user')
+    path('get_authenticated_user/', get_authenticated_user, name='get_authenticated_user'),
+    path('get_user_connections/', get_user_connections, name='get_user_connections'),
+    path('get_user_names/', get_user_names, name='get_user_names'),
 ]

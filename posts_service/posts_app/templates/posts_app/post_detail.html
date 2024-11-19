@@ -9,13 +9,14 @@
 {% extends 'posts_app/base.html' %}
 
 {% load custom_tags %}
+{% load custom_filters %}
 
 {% block content %}
 
     {% user_desktop_url as udu %}
 
     <h1>{{ post.title }}</h1>
-    <p><strong>Author:</strong> <a href="{% user_profile_url post.author_id %}">{{ post.author_id }}</a></p>
+    <p><strong>Author:</strong> <a href="{% user_profile_url post.author_id %}">{{ posts_users|get_item:post.pk }}</a></p>
     <p><strong>Content:</strong> {{ post.content }}</p>
     <p><strong>Create Date:</strong> {{ post.create_time }}</p>
     <p><strong>Update Date:</strong> {{ post.update_time }}</p>

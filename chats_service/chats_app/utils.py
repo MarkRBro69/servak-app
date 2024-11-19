@@ -1,18 +1,26 @@
+import logging
+
 import requests
 import random
 import string
 
-from django.core.cache import cache
+from django_redis import get_redis_connection
 
 from chats_service.cluster_settings import USERS_SERVICE_URL
 
 
+logger = logging.getLogger('logger')
+
+
 def get_room_id(user_id):
-    if cache.hexists('user_room_set', user_id):
-        room_id = cache.hget('user_room_set', user_id)
+    rcache = get_redis_connection("default")
+    logger.debug(f'get_room_id: user_id: {user_id}')
+    if rcache.hexists('user_room_set', user_id):
+        room_id = rcache.hget('user_room_set', user_id).decode()
     else:
         room_id = generate_unique_room_id()
-        cache.hset('user_room_set', user_id, room_id)
+        rcache.hset('user_room_set', user_id, room_id)
+    logger.debug(f'get_room_id: room_id: {room_id}')
     return room_id
 
 
@@ -22,16 +30,18 @@ def generate_id(length=8):
 
 
 def generate_unique_room_id():
+    rcache = get_redis_connection("default")
     max_attempts = 100
 
     for _ in range(max_attempts):
         new_id = generate_id()
 
-        if not cache.sismember('room_set', new_id):
-            cache.sadd('room_set', new_id)
+        if not rcache.sismember('room_set', new_id):
+            rcache.sadd('room_set', new_id)
+            logger.debug(f'generate_unique_room_id: new id generated: {new_id}')
             return new_id
 
-    raise Exception('Unique is not generated')
+    raise Exception('Unique id is not generated')
 
 
 def add_csrf_token(request, headers):
@@ -95,7 +105,7 @@ def auth_user(func):
     def wrapper(*args, **kwargs):
         request = args[0]
         user, uat, urt = get_authenticated_user(request)
-        response = func(request, user, *args, **kwargs)
+        response = func(*args, user=user, **kwargs)
         if uat and urt:
             response = set_tokens(response, uat, urt)
         return response

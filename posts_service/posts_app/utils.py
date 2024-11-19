@@ -1,7 +1,9 @@
-
+import logging
 import requests
 
 from posts_service.cluster_settings import USERS_SERVICE_URL
+
+logger = logging.getLogger('logger')
 
 
 def add_csrf_token(request, headers):
@@ -44,12 +46,21 @@ def set_tokens(response, uat, urt):
     return response
 
 
-def auth_user(func):
-    def wrapper(*args, **kwargs):
-        request = args[0]
-        user, uat, urt = get_authenticated_user(request)
-        response = func(request, user, *args, **kwargs)
-        if uat and urt:
-            response = set_tokens(response, uat, urt)
-        return response
-    return wrapper
+def get_user_names(posts, uat, urt):
+    user_ids = {}
+    for post in posts:
+        user_ids[post.pk] = post.author_id
+
+    logger.debug(f'get_user_names: user_ids: {user_ids}')
+    cookies = {'uat': uat, 'urt': urt}
+    usr_url = USERS_SERVICE_URL
+    url = f'http://{usr_url}/api/usr/get_user_names/'
+    response = requests.post(url, cookies=cookies, json=user_ids)
+    if response.status_code == 200:
+        post_user_dict = response.json()
+        logger.debug(f'get_user_names: post_user_dict: {post_user_dict}')
+        return post_user_dict
+    else:
+        logger.debug(f'get_user_names: Error: {response.status_code}')
+        return None
+

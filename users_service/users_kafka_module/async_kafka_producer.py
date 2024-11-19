@@ -3,7 +3,7 @@ import logging
 
 from users_service import settings
 
-logger = logging.getLogger('users_service')
+logger = logging.getLogger('logger')
 
 
 def produce_profile_notification(user_id: int):

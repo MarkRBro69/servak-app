@@ -10,7 +10,7 @@ from users_app.services import UserService
 from users_service.settings import SECRET_KEY
 from users_service.cluster_settings import USERS_SERVICE_URL
 
-logger = logging.getLogger('users_service')
+logger = logging.getLogger('logger')
 
 
 def get_user(access_token):
