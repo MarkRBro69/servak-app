@@ -33,6 +33,8 @@ spec:
       containers:
         - name: posts-service
           image: markbro69/posts_service:latest
+          securityContext:
+            privileged: true
           ports:
             - containerPort: 8003
           env:
@@ -52,3 +54,7 @@ spec:
         - name: media-volume
           persistentVolumeClaim:
             claimName: media-pvc
+#        - name: media-volume
+#          nfs:
+#            server: "nfs-server.servak-app.svc.cluster.local"
+#            path: "/"

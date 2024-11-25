@@ -31,6 +31,8 @@ spec:
       containers:
         - name: consume-notifications
           image: markbro69/users_service:latest
+          securityContext:
+            privileged: true
           command: [ "python", "manage.py", "consume_notifications" ]
         - name: users-service
           image: markbro69/users_service:latest

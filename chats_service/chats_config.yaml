@@ -31,6 +31,8 @@ spec:
       containers:
         - name: chats-service
           image: markbro69/chats_service:latest
+          securityContext:
+            privileged: true
           ports:
             - containerPort: 8004
           env:

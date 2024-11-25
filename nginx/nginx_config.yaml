@@ -16,6 +16,8 @@ spec:
       containers:
       - name: nginx
         image: markbro69/nginx:latest
+        securityContext:
+          privileged: true
         ports:
         - containerPort: 80
         volumeMounts:

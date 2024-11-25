@@ -10,8 +10,12 @@ spec:
   capacity:
     storage: 1Gi
   storageClassName: manual
-  hostPath:
-    path: "/mnt/data/media"
+  nfs:
+    path: /
+    server: 10.244.3.5
+  mountOptions:
+    - nfsvers=4.1
+  persistentVolumeReclaimPolicy: Retain
 
 ---
 apiVersion: v1
