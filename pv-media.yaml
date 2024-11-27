@@ -12,7 +12,7 @@ spec:
   storageClassName: manual
   nfs:
     path: /
-    server: 10.244.3.5
+    server: 10.96.0.100
   mountOptions:
     - nfsvers=4.1
   persistentVolumeReclaimPolicy: Retain

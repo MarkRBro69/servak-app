@@ -18,7 +18,7 @@ def get_room_id(user_id):
     if rcache.hexists('user_room_set', user_id):
         room_id = rcache.hget('user_room_set', user_id).decode()
     else:
-        room_id = generate_unique_room_id()
+        room_id = generate_unique_room_id(user_id)
         rcache.hset('user_room_set', user_id, room_id)
     logger.debug(f'get_room_id: room_id: {room_id}')
     return room_id
@@ -29,19 +29,41 @@ def generate_id(length=8):
     return ''.join(random.choices(characters, k=length))
 
 
-def generate_unique_room_id():
+def generate_unique_room_id(user_id):
     rcache = get_redis_connection("default")
     max_attempts = 100
 
     for _ in range(max_attempts):
         new_id = generate_id()
 
-        if not rcache.sismember('room_set', new_id):
-            rcache.sadd('room_set', new_id)
+        if not rcache.hexists('room_set', new_id):
+            rcache.hset('room_set', new_id, user_id)
             logger.debug(f'generate_unique_room_id: new id generated: {new_id}')
             return new_id
 
     raise Exception('Unique id is not generated')
+
+
+def check_room_owner(user_id, room_id):
+    rcache = get_redis_connection("default")
+    room_master_user = rcache.hget('room_set', room_id).decode()
+    logger.debug(f'check_room_owner: room_id: {room_id}')
+    logger.debug(f'check_room_owner: room_master_user: {room_master_user}')
+    logger.debug(f'check_room_owner: room_master_user type: {type(room_master_user)}')
+    logger.debug(f'check_room_owner: user_id: {user_id}')
+    logger.debug(f'check_room_owner: user_id type: {type(user_id)}')
+    if str(room_master_user) == str(user_id):
+        return True
+    else:
+        return False
+
+
+def get_room_owner(room_id):
+    rcache = get_redis_connection("default")
+    room_master_user = rcache.hget('room_set', room_id).decode()
+    logger.debug(f'get_room_owner: room_id: {room_id}')
+    logger.debug(f'get_room_owner: room_master_user: {room_master_user}')
+    return room_master_user
 
 
 def add_csrf_token(request, headers):
@@ -111,4 +133,16 @@ def auth_user(func):
         return response
     return wrapper
 
+
+def unpack_subscription_names(subscription_arr):
+    follower = []
+    followed = []
+    for subscription in subscription_arr:
+        follower.append(subscription['follower']['username'])
+        followed.append(subscription['followed']['username'])
+
+    logger.debug(f'unpack_subscription_names: follower: {follower}')
+    logger.debug(f'unpack_subscription_names: followed: {followed}')
+
+    return follower, followed
 

@@ -8,7 +8,7 @@
         <p><strong>Followers</strong></p>
         <ul>
             {% for f in followers %}
-                <li><a href="">{{ f.follower.user }}</a></li>
+                <li><a href="">{{ f }}</a></li>
             {% empty %}
                 <li>No followers yet</li>
             {% endfor %}
@@ -17,7 +17,7 @@
         <p><strong>Followings</strong></p>
         <ul>
             {% for f in followings %}
-                <li><a href="">{{ f.followed.user }}</a></li>
+                <li><a href="">{{ f }}</a></li>
             {% empty %}
                 <li>No followings</li>
             {% endfor %}
@@ -48,14 +48,46 @@
                 messageInputDom.value = '';
             };
 
-            chatSocket.onmessage = function(e) {
+            chatSocket.onmessage = function (e) {
                 const data = JSON.parse(e.data);
-                const message = data['message'];
-                console.log("onmessage " + message);
 
-                const messageElement = document.createElement('p');
-                messageElement.textContent = message;
-                document.querySelector('#chat-log').appendChild(messageElement);
+                if (data.type === "chat_message") {
+                    console.log("Chat message received: " + data.message);
+
+                    const messageElement = document.createElement('p');
+                    messageElement.textContent = data.message;
+                    document.querySelector('#chat-log').appendChild(messageElement);
+
+                } else if (data.type === "connection_request") {
+                    console.log("Connection request from user: " + data.message);
+
+                    const accept = confirm(`User ${data.message} wants to join. Accept?`);
+                    chatSocket.send(JSON.stringify({
+                        'type': 'connection_response',
+                        'message': accept.toString(), // "true" или "false"
+                        'from_user': data.message
+                    }));
+
+                } else if (data.type === "connection_granted") {
+                    console.log("Connection granted to room: " + data.message);
+
+                    alert(`You have joined the room: ${data.message}`);
+                } else if (data.type === "connection_denied") {
+                    console.log("Connection denied.");
+                    alert("Your connection request was denied.");
+                } else {
+                    console.log("Unknown message type: ", data);
+                }
+            };
+
+            chatSocket.onopen = function (e) {
+                console.log("WebSocket connected successfully.");
+
+                chatSocket.send(JSON.stringify({
+                    'type': 'connection_request',
+                    'message': roomId
+                }));
+                console.log("Connection request sent for room: " + roomId);
             };
 
             chatSocket.onerror = function(e) {

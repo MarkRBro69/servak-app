@@ -60,4 +60,4 @@ spec:
     port: 111
   selector:
     app: nfs-server
-  clusterIP: None
+  clusterIP: 10.96.0.100
