@@ -6,50 +6,71 @@
 <!--    profile-->
 <!--    followers-->
 <!--    followings-->
+<!--    notifications-->
 
 {% extends 'users_app/base.html' %}
 
 {% block content %}
 
+<div class="profile-container">
     <h1>{{ profile.user.username }}</h1>
-    <p><strong>Bio:</strong> {{ profile.bio }}</p>
-    <p><strong>Location:</strong> {{ profile.location }}</p>
-    <p><strong>Birth Date:</strong> {{ profile.birth_date }}</p>
+    <p><strong>Bio:</strong> {{ profile.bio|default:"No bio available" }}</p>
+    <p><strong>Location:</strong> {{ profile.location|default:"No location specified" }}</p>
+    <p><strong>Birth Date:</strong> {{ profile.birth_date|date:"Y-m-d" }}</p>
 
     {% if profile.user.pk != auth_user_id %}
-        <form action="{% url 'follow_user' profile.user.pk %}" method="post">
-            {% csrf_token %}
-            <button type="submit">Follow</button>
-        </form>
-
-        <form action="{% url 'unfollow_user' profile.user.pk %}" method="post">
-            {% csrf_token %}
-            <button type="submit">Unfollow</button>
-        </form>
+        <div class="profile-actions">
+            <form action="{% url 'follow_user' profile.user.pk %}" method="post" class="inline-form">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Follow</button>
+            </form>
+            <form action="{% url 'unfollow_user' profile.user.pk %}" method="post" class="inline-form">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Unfollow</button>
+            </form>
+        </div>
     {% else %}
-        <p><strong>Following disabled on yourself</strong></p>
+        <p class="info-text"><strong>You cannot follow yourself.</strong></p>
     {% endif %}
 
-    <p><strong>Followers</strong></p>
-    {% for f in followers %}
-        <li><a href="{% url 'profile_detail' f.follower.user.pk %}">{{ f.follower.user }}</a></li>
-    {% empty %}
-        <li>No followers yet</li>
-    {% endfor %}
+    <div class="followers-section">
+        <h2>Followers ({{ followers|length }})</h2>
+        {% if followers %}
+            <ul>
+                {% for f in followers %}
+                    <li><a href="{% url 'profile_detail' f.follower.user.pk %}">{{ f.follower.user.username }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No followers yet.</p>
+        {% endif %}
+    </div>
 
-    <p><strong>Followings</strong></p>
-    {% for f in followings %}
-        <li><a href="{% url 'profile_detail' f.followed.user.pk %}">{{ f.followed.user }}</a></li>
-    {% empty %}
-        <li>No followings</li>
-    {% endfor %}
+    <div class="followings-section">
+        <h2>Following ({{ followings|length }})</h2>
+        {% if followings %}
+            <ul>
+                {% for f in followings %}
+                    <li><a href="{% url 'profile_detail' f.followed.user.pk %}">{{ f.followed.user.username }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No followings.</p>
+        {% endif %}
+    </div>
 
-    <p><strong>Notifications</strong></p>
-    {% for nots in notifications %}
-        <li><a href="{% url 'notification_detail' nots.id %}">{{ nots.message }}</a></li>
-    {% empty %}
-        <li>No notifications</li>
-    {% endfor %}
-
+    <div class="notifications-section">
+        <h2>Notifications</h2>
+        {% if notifications %}
+            <ul>
+                {% for nots in notifications %}
+                    <li><a href="{% url 'notification_detail' nots.id %}">{{ nots.message }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No notifications.</p>
+        {% endif %}
+    </div>
+</div>
 
 {% endblock %}

@@ -1,104 +1,102 @@
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Chat Room</title>
-    </head>
-    <body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'chats_app/css/chats_design.css' %}">
+</head>
+<body class="chat-page">
 
-        <p><strong>Followers</strong></p>
-        <ul>
-            {% for f in followers %}
-                <li><a href="">{{ f }}</a></li>
-            {% empty %}
-                <li>No followers yet</li>
-            {% endfor %}
-        </ul>
+    <div class="followers-followings">
+        <div class="followers">
+            <p><strong>Followers</strong></p>
+            <ul>
+                {% for f in followers %}
+                    <li><a href="">{{ f }}</a></li>
+                {% empty %}
+                    <li>No followers yet</li>
+                {% endfor %}
+            </ul>
+        </div>
 
-        <p><strong>Followings</strong></p>
-        <ul>
-            {% for f in followings %}
-                <li><a href="">{{ f }}</a></li>
-            {% empty %}
-                <li>No followings</li>
-            {% endfor %}
-        </ul>
+        <div class="followings">
+            <p><strong>Followings</strong></p>
+            <ul>
+                {% for f in followings %}
+                    <li><a href="">{{ f }}</a></li>
+                {% empty %}
+                    <li>No followings</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 
+    <div class="chat-room">
         <h1>Chat Room</h1>
-        <div id="chat-log"></div>
-        <input id="chat-message-input" type="text" placeholder="Type a message...">
-        <button id="send-message-button">Send</button>
+        <div id="chat-log" class="chat-log"></div>
+        <div class="chat-input-container">
+            <input id="chat-message-input" class="chat-message-input" type="text" placeholder="Type a message...">
+            <button id="send-message-button" class="send-message-button">Send</button>
+        </div>
+    </div>
 
-        <script>
-            const roomId = "{{ room_id }}";
-            const chatSocket = new WebSocket(
-                'ws://' + window.location.host + '/ws/chat/' + roomId + '/'
-            );
-            console.log("ws://" + window.location.host + "/ws/chat/" + roomId + "/");
+    <script>
+        const roomId = "{{ room_id }}";
+        const chatSocket = new WebSocket(
+            'ws://' + window.location.host + '/ws/chat/' + roomId + '/'
+        );
 
-            document.querySelector('#send-message-button').onclick = function(e) {
-                const messageInputDom = document.querySelector('#chat-message-input');
-                const message = messageInputDom.value;
+        document.querySelector('#send-message-button').onclick = function(e) {
+            const messageInputDom = document.querySelector('#chat-message-input');
+            const message = messageInputDom.value;
 
+            chatSocket.send(JSON.stringify({
+                'type': 'chat_message',
+                'message': message
+            }));
+
+            messageInputDom.value = '';
+        };
+
+        chatSocket.onmessage = function (e) {
+            const data = JSON.parse(e.data);
+
+            if (data.type === "chat_message") {
+                const messageElement = document.createElement('p');
+                messageElement.textContent = data.message;
+                document.querySelector('#chat-log').appendChild(messageElement);
+            } else if (data.type === "connection_request") {
+                const accept = confirm(`User ${data.message} wants to join. Accept?`);
                 chatSocket.send(JSON.stringify({
-                    'type': 'chat_message',
-                    'message': message
+                    'type': 'connection_response',
+                    'message': accept.toString(),
+                    'from_user': data.message
                 }));
-                console.log("send " + message);
+            } else if (data.type === "connection_granted") {
+                alert(`You have joined the room: ${data.message}`);
+            } else if (data.type === "connection_denied") {
+                alert("Your connection request was denied.");
+            } else {
+                console.log("Unknown message type: ", data);
+            }
+        };
 
-                messageInputDom.value = '';
-            };
+        chatSocket.onopen = function (e) {
+            chatSocket.send(JSON.stringify({
+                'type': 'connection_request',
+                'message': roomId
+            }));
+        };
 
-            chatSocket.onmessage = function (e) {
-                const data = JSON.parse(e.data);
+        chatSocket.onerror = function(e) {
+            alert("Error with WebSocket connection");
+        };
 
-                if (data.type === "chat_message") {
-                    console.log("Chat message received: " + data.message);
-
-                    const messageElement = document.createElement('p');
-                    messageElement.textContent = data.message;
-                    document.querySelector('#chat-log').appendChild(messageElement);
-
-                } else if (data.type === "connection_request") {
-                    console.log("Connection request from user: " + data.message);
-
-                    const accept = confirm(`User ${data.message} wants to join. Accept?`);
-                    chatSocket.send(JSON.stringify({
-                        'type': 'connection_response',
-                        'message': accept.toString(), // "true" или "false"
-                        'from_user': data.message
-                    }));
-
-                } else if (data.type === "connection_granted") {
-                    console.log("Connection granted to room: " + data.message);
-
-                    alert(`You have joined the room: ${data.message}`);
-                } else if (data.type === "connection_denied") {
-                    console.log("Connection denied.");
-                    alert("Your connection request was denied.");
-                } else {
-                    console.log("Unknown message type: ", data);
-                }
-            };
-
-            chatSocket.onopen = function (e) {
-                console.log("WebSocket connected successfully.");
-
-                chatSocket.send(JSON.stringify({
-                    'type': 'connection_request',
-                    'message': roomId
-                }));
-                console.log("Connection request sent for room: " + roomId);
-            };
-
-            chatSocket.onerror = function(e) {
-                console.error("WebSocket error: ", e);
-                alert("Error with WebSocket connection");
-            };
-
-            chatSocket.onclose = function(e) {
-                console.log('Chat socket closed');
-                alert("The connection was closed.");
-            };
-        </script>
-    </body>
-    </html>
+        chatSocket.onclose = function(e) {
+            alert("The connection was closed.");
+        };
+    </script>
+</body>
+</html>

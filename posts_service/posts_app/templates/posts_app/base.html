@@ -6,6 +6,8 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ title }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'posts_app/css/posts_design.css' %}">
 </head>
 <body>
 <h1>{{ title }}</h1>

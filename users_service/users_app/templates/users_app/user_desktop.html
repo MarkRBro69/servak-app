@@ -10,14 +10,16 @@
 {% load custom_tags %}
 
 {% block content %}
-    <p>Hello, <a href="{% url 'profile_detail' auth_user.id %}" class="btn">{{ auth_user.username }}</a></p>
-    <form action="{% url 'logout' %}" method="post">
-        {% csrf_token %}
-        <button type="submit">Logout</button>
-    </form>
-    <p><a href="{% url 'profile_update' auth_user.id %}" class="btn">Update profile</a></p>
-    <p><a href="{% create_post_url %}" class="btn">Create post</a></p>
-    <p><a href="{% posts_by_author_url auth_user.id %}" class="btn">Your posts</a></p>
-    <p><a href="{% all_posts_url %}" class="btn">All posts</a></p>
-    <p><a href="{% your_chat_url %}" class="btn">Your chat</a></p>
+    <div class="user-desktop-container">
+        <h1>Welcome, <a href="{% url 'profile_detail' auth_user.id %}" class="btn">{{ auth_user.username }}</a></h1>
+        <p><a href="{% url 'profile_update' auth_user.id %}" class="btn">Update profile</a></p>
+        <p><a href="{% create_post_url %}" class="btn">Create post</a></p>
+        <p><a href="{% posts_by_author_url auth_user.id %}" class="btn">Your posts</a></p>
+        <p><a href="{% all_posts_url %}" class="btn">All posts</a></p>
+        <p><a href="{% your_chat_url %}" class="btn">Your chat</a></p>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+    </div>
 {% endblock %}
