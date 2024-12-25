@@ -15,7 +15,10 @@ It enables users to create posts, follow others, comment on posts, and communica
 
 - **Real-Time Chat**  
   - Send and receive messages in real-time via WebSockets.  
-  - Participate in group or private chats.  
+  - Participate in group or private chats.
+ 
+## System Design 🔗  
+![sustem_design](https://github.com/MarkRBro69/servak-app/blob/main/system_design/servak_service.png)
 
 ## 🛠 Technology Stack  
 
