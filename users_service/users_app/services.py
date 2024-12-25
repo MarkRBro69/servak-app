@@ -9,7 +9,7 @@ import requests
 
 from users_app.mongomodels import Notification
 
-logger = logging.getLogger('users_service')
+logger = logging.getLogger('logger')
 
 
 class UserService:
@@ -58,6 +58,11 @@ class UserService:
     def get_user(user_id):
         user = get_object_or_404(User, id=user_id)
         return user
+
+    @staticmethod
+    def get_user_name(user_id):
+        user = get_object_or_404(User.objects.values('username'), id=user_id)
+        return user['username']
 
     @staticmethod
     def get_user_profile(user_id):

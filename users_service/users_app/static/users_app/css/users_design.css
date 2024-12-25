@@ -1,0 +1,325 @@
+body {
+    font-family: 'Arial', sans-serif; /* Set the font to Arial */
+    background-color: #121212; /* Dark background color */
+    color: #F8A86A; /* Light orange text color */
+    margin: 40px; /* Set margin around the body */
+    padding: 0px; /* Remove default padding */
+    background: linear-gradient(135deg, #121212, #1e1e1e); /* Add a gradient background */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for background and text color changes */
+
+/* Basic button styles */
+.btn {
+    padding: 10px 20px;  /* Add padding to the buttons */
+    font-size: 18px;     /* Set font size for button text */
+    text-decoration: none; /* Remove underline from links */
+    display: inline-block; /* Make the link behave like a button */
+    border-radius: 5px;  /* Round the corners of the button */
+}
+
+/* Heading styles */
+h1 {
+    color: #FF5722; /* Orange color for headings */
+    font-weight: bold; /* Make the headings bold */
+    font-size: 32px; /* Set font size */
+}
+
+/* User Desktop Styles */
+.user-desktop-container {
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 800px;
+    margin: 20px auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    color: #F8A86A;
+}
+
+.user-desktop-container h1 {
+    color: #FF5722;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+/* Links in User Desktop */
+.user-desktop-container a {
+    color: #FF5722;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    background-color: #333;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.user-desktop-container a:hover {
+    background-color: #444;
+}
+
+/* Logout Button */
+.user-desktop-container form button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.user-desktop-container form button:hover {
+    background-color: #a71d2a;
+}
+
+
+/* Profile Container */
+.profile-container {
+    background-color: #1e1e1e; /* Dark background for the profile container */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Soft shadow for depth */
+    margin: 20px auto;
+    max-width: 900px;
+    color: #F8A86A; /* Text color matching the theme */
+}
+
+/* Profile Header */
+.profile-container h1 {
+    color: #FF5722; /* Header color */
+    font-size: 36px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+/* Profile Information */
+.profile-container p {
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #FF5722; /* Color for profile details */
+}
+
+/* Profile Actions */
+.profile-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.profile-actions form button {
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.profile-actions form button:hover {
+    background-color: #FF7043;
+}
+
+.profile-actions .btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.profile-actions .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.profile-actions .btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.profile-actions .btn-danger:hover {
+    background-color: #a71d2a;
+}
+
+/* Followers & Followings Section */
+.followers-section, .followings-section {
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.followers-section h2, .followings-section h2 {
+    color: #FF5722;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.followers-section ul, .followings-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.followers-section li, .followings-section li {
+    background-color: #333;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.followers-section li a, .followings-section li a {
+    color: #FF5722;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.followers-section li:hover, .followings-section li:hover {
+    background-color: #444;
+}
+
+/* Notifications Section */
+.notifications-section {
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.notifications-section h2 {
+    color: #FF5722;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.notifications-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.notifications-section li {
+    background-color: #333;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.notifications-section li a {
+    color: #FF5722;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.notifications-section li:hover {
+    background-color: #444;
+}
+
+
+/* Notification Card */
+.notification-card {
+    background-color: #2c2c2c; /* Dark background */
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Soft shadow for depth */
+    margin: 20px auto;
+    max-width: 800px;
+    color: #F8A86A; /* Text color matching the theme */
+}
+
+.notification-card h2 {
+    color: #FF5722; /* Heading color */
+    font-size: 32px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Notification Label */
+.notification-label {
+    font-weight: bold;
+    color: #FF5722; /* Accent color for labels */
+}
+
+/* Notification Details */
+.notification-card p {
+    font-size: 18px;
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: #F8A86A; /* Text color for notification details */
+}
+
+/* Buttons for interaction */
+.notification-card a {
+    color: #007bff;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 18px;
+    margin-top: 20px;
+    display: inline-block;
+}
+
+.notification-card a:hover {
+    text-decoration: underline;
+}
+
+
+/* Style for the main container on the home page */
+.home-page-container {
+    text-align: center;  /* Center the content */
+    margin-top: 50px;    /* Add margin to the top for spacing */
+}
+
+/* Style for the page title */
+.home-page-container h1 {
+    font-size: 36px;     /* Set font size for the title */
+    margin-bottom: 30px; /* Add space below the title */
+}
+
+/* Style for the block containing the buttons */
+.auth-buttons p {
+    margin: 20px 0; /* Add vertical margin between the buttons */
+}
+
+/* Style for the 'Login' button */
+.auth-buttons .btn-primary {
+    background-color: #4CAF50; /* Green background for 'Login' */
+    color: white;              /* White text color */
+    border: none;              /* Remove border */
+}
+
+/* Style for the 'Register' button */
+.auth-buttons .btn-secondary {
+    background-color: #008CBA; /* Blue background for 'Register' */
+    color: white;              /* White text color */
+    border: none;              /* Remove border */
+}
+
+/* Hover effect for buttons */
+.auth-buttons .btn:hover {
+    opacity: 0.9; /* Reduce opacity when the user hovers over the button */
+}
+
+
+/* Style for the form container */
+form {
+    max-width: 600px; /* Set the maximum width for the form */
+    margin: 0 auto;   /* Center the form horizontally */
+    padding: 20px;    /* Add padding around the form */
+    border: 1px solid #ddd; /* Add a light border around the form */
+    border-radius: 8px; /* Round the corners of the form */
+    background-color: #1e1e1e; /* Light background color */
+}
+
+/* Style for the submit button */
+button[type="submit"] {
+    background-color: #4CAF50; /* Green background */
+    color: white;              /* White text */
+    padding: 10px 20px;        /* Padding inside the button */
+    font-size: 16px;           /* Font size */
+    border: none;              /* Remove the default border */
+    border-radius: 5px;        /* Round the button corners */
+    cursor: pointer;          /* Change cursor to pointer when hovering */
+}
+
+/* Hover effect for the submit button */
+button[type="submit"]:hover {
+    background-color: #45a049; /* Darken the button color on hover */
+}

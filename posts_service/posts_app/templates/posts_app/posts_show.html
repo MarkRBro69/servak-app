@@ -7,56 +7,36 @@
 {% extends 'posts_app/base.html' %}
 
 {% load custom_tags %}
+{% load custom_filters %}
 
 {% block content %}
 
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Author</th>
-            <th>Title</th>
-            <th>Content</th>
-            <th>Create date</th>
-            <th>Update date</th>
-            <th>Published</th>
-            <th>Likes</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for post in posts %}
-            <tr>
-                <td>{{ post.pk }}</td>
-                <td><a href="{% user_profile_url post.author_id %}">{{ post.author_id }}</a></td>
-                <td><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></td>
-                <td>{{ post.content }}</td>
-                <td>{{ post.create_time }}</td>
-                <td>{{ post.update_time }}</td>
-                <td>{{ post.published }}</td>
-                <td>{{ post.like_count }}</td>
-                <td>
-                    <button type="button" onclick="likePost({{ post.id }})">Like</button>
-                    <button type="button" onclick="unlikePost({{ post.id }})">Unlike</button>
-
-                    {% if auth_user_id == post.author_id %}
-                        <button type="button" onclick="deletePost({{ post.id }})">Delete</button>
-
-                        <form method="POST" action="{% url 'delete_post' post.id %}">
-                            {% csrf_token %}
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button type="submit">Delete Post</button>
-                        </form>
-                    {% endif %}
-                </td>
-            </tr>
-        {% empty %}
-            <tr>
-                <td colspan="9">No posts</td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="posts-container">
+    {% for post in posts %}
+        <div class="post-card">
+            <h2 class="post-title"><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h2>
+            <p class="post-meta">
+                <strong>Author:</strong> <a href="{% user_profile_url post.author_id %}">{{ posts_users|get_item:post.pk }}</a>
+                | <strong>Created:</strong> {{ post.create_time|date:"Y-m-d H:i" }}
+                | <strong>Updated:</strong> {{ post.update_time|date:"Y-m-d H:i" }}
+            </p>
+            <p class="post-content">{{ post.content|truncatewords:20 }}</p>
+            <p class="post-stats">
+                <strong>Likes:</strong> {{ post.like_count }}
+                | <strong>Published:</strong> {{ post.published|yesno:"Yes,No" }}
+            </p>
+            <div class="post-actions">
+                <button type="button" class="btn btn-like" onclick="likePost({{ post.id }})">Like</button>
+                <button type="button" class="btn btn-unlike" onclick="unlikePost({{ post.id }})">Unlike</button>
+                {% if auth_user_id == post.author_id %}
+                    <button type="button" class="btn btn-delete" onclick="deletePost({{ post.id }})">Delete</button>
+                {% endif %}
+            </div>
+        </div>
+    {% empty %}
+        <p>No posts available.</p>
+    {% endfor %}
+</div>
 
 <script>
     function getCookie(name) {

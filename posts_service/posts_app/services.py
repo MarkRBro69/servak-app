@@ -64,4 +64,3 @@ class PostLikeService:
             post.like_count -= 1
             post.save()
             post_like.delete()
-

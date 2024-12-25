@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nfs-installer
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      app: nfs-installer
+  template:
+    metadata:
+      labels:
+        app: nfs-installer
+    spec:
+      hostPID: true
+      containers:
+      - name: nfs-installer
+        image: debian:bookworm-slim
+        securityContext:
+          privileged: true
+        command: ["/bin/sh"]
+        args:
+          - "-c"
+          - |
+            apt update && apt install -y nfs-common && echo "NFS installed on $(hostname)"
+        volumeMounts:
+        - name: host-root
+          mountPath: /host
+      restartPolicy: Always
+      volumes:
+      - name: host-root
+        hostPath:
+          path: /

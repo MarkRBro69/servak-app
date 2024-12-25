@@ -1,0 +1,318 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212;
+    color: #F8A86A;
+    margin: 40px;
+    padding: 0px;
+    background: linear-gradient(135deg, #121212, #1e1e1e);
+}
+
+/* Posts Container */
+.posts-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+/* Individual Post Card */
+.post-card {
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    color: #F8A86A;
+}
+
+.post-title {
+    font-size: 24px;
+    color: #FF5722;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.post-title a {
+    text-decoration: none;
+    color: #FF5722;
+    text-decoration: underline;
+}
+
+.post-title a:hover {
+    text-decoration: underline;
+}
+
+.post-meta a {
+    text-decoration: none;
+    color: #FF5722;
+    text-decoration: underline;
+}
+
+.post-meta a:hover {
+    text-decoration: underline;
+}
+
+.post-meta {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #FF5722;
+}
+
+.post-meta strong {
+    color: #FF5722;
+}
+
+.post-content {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.post-stats {
+    font-size: 16px;
+    color: #FF5722;
+}
+
+.post-actions {
+    display: flex;
+    gap: 15px;
+}
+
+/* Button Styles */
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-like {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-like:hover {
+    background-color: #45a049;
+}
+
+.btn-unlike {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-unlike:hover {
+    background-color: #a71d2a;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+    font-weight: bold;
+}
+
+.btn-delete:hover {
+    background-color: #a71d2a;
+}
+
+/* Empty State Message */
+.posts-container p {
+    font-size: 18px;
+    color: #FF5722;
+    font-weight: bold;
+}
+
+/* Hover Effects */
+.post-card:hover {
+    background-color: #2c2c2c;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.post-title:hover {
+    color: #FF7043;
+}
+
+/* Style for the form container */
+form {
+    max-width: 600px; /* Set the maximum width for the form */
+    margin: 0px;   /* Center the form horizontally */
+    padding: 20px;    /* Add padding around the form */
+    border: 1px solid #ddd; /* Add a light border around the form */
+    border-radius: 8px; /* Round the corners of the form */
+    background-color: #1e1e1e; /* Light background color */
+}
+
+/* Style for the submit button */
+button[type="submit"] {
+    background-color: #4CAF50; /* Green background */
+    color: white;              /* White text */
+    padding: 10px 20px;        /* Padding inside the button */
+    font-size: 16px;           /* Font size */
+    border: none;              /* Remove the default border */
+    border-radius: 5px;        /* Round the button corners */
+    cursor: pointer;          /* Change cursor to pointer when hovering */
+}
+
+/* Hover effect for the submit button */
+button[type="submit"]:hover {
+    background-color: #45a049; /* Darken the button color on hover */
+}
+
+
+/* Post Detail Page Styles */
+.post-detail-page {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212;
+    color: #F8A86A;
+    margin: 40px;
+    padding: 0px;
+    background: linear-gradient(135deg, #121212, #1e1e1e);
+}
+
+/* Post Title */
+.post-detail-page h1 {
+    font-size: 32px;
+    color: #FF5722;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Post Metadata */
+.post-detail-page p {
+    font-size: 16px;
+    margin: 8px 0;
+    color: #FF5722;
+}
+
+.post-detail-page p strong {
+    color: #FF5722;
+}
+
+.post-detail-page p a {
+    color: #FF5722;
+    text-decoration: none;
+}
+
+.post-detail-page p a:hover {
+    text-decoration: underline;
+}
+
+/* Post Image Section */
+.post-detail-page #imageContainer {
+    margin: 20px 0;
+}
+
+.post-detail-page #postImage {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.post-detail-page #imageContainer p {
+    color: #FF5722;
+    font-size: 18px;
+}
+
+/* Comments Section */
+.post-detail-page h2 {
+    font-size: 28px;
+    color: #FF5722;
+    margin-top: 40px;
+}
+
+.post-detail-page ul {
+    list-style-type: none;
+    padding-left: 0;
+    color: #F8A86A;
+}
+
+.post-detail-page ul li {
+    font-size: 16px;
+    margin: 8px 0;
+}
+
+.post-detail-page ul li a {
+    color: #FF5722;
+    text-decoration: none;
+}
+
+.post-detail-page ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Create Comment Form */
+.post-detail-page form {
+    margin-top: 20px;
+}
+
+.post-detail-page textarea {
+    width: 95%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #2c2c2c;
+    color: #F8A86A;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.post-detail-page textarea:focus {
+    outline: none;
+    border-color: #FF5722;
+}
+
+.post-detail-page button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.post-detail-page button:hover {
+    background-color: #45a049;
+}
+
+.post-detail-page button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+/* Update/Delete Post */
+.post-detail-page .btn {
+    background-color: #FF5722;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.post-detail-page .btn:hover {
+    background-color: #FF7043;
+}
+
+.post-detail-page button[type="button"] {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.post-detail-page button[type="button"]:hover {
+    background-color: #a71d2a;
+}
+
+/* Empty State for Comments */
+.post-detail-page ul li.no-comments {
+    font-style: italic;
+    color: #F8A86A;
+}
+

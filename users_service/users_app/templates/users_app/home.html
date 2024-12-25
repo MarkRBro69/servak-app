@@ -6,6 +6,12 @@
 {% extends 'users_app/base.html' %}
 
 {% block content %}
-    <p><a href="{% url 'login' %}" class="btn">Login</a></p>
-    <p><a href="{% url 'register' %}" class="btn">Register</a></p>
+<div class="home-page-container">
+    <h1>Welcome to Our Website!</h1>
+
+    <div class="auth-buttons">
+        <p><a href="{% url 'login' %}" class="btn btn-primary">Login</a></p>
+        <p><a href="{% url 'register' %}" class="btn btn-secondary">Register</a></p>
+    </div>
+</div>
 {% endblock %}

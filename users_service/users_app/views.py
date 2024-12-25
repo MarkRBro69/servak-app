@@ -1,3 +1,5 @@
+import json
+
 from django.contrib.auth import logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import JsonResponse
@@ -5,14 +7,15 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+from users_app.serializers import SubscriptionSerializer
 from users_kafka_module.async_kafka_producer import produce_profile_notification
 
 from users_app.forms import *
 from users_app.services import *
 from users_app.utils import set_tokens, get_auth_user, get_user
-from users_service.settings import THIS_SERVICE_URL
+from users_service.cluster_settings import USERS_SERVICE_URL
 
-logger = logging.getLogger('users_service')
+logger = logging.getLogger('logger')
 
 
 def home(request):
@@ -241,7 +244,7 @@ def get_authenticated_user(request):
             response = Response(response_data, status=200)
             return response
         else:
-            url = f'http://{THIS_SERVICE_URL}/api/token/refresh/'
+            url = f'http://{USERS_SERVICE_URL}/api/token/refresh/'
             urt = request.COOKIES.get('urt')
             data = {'refresh': urt}
 
@@ -279,3 +282,34 @@ def notification_detail(request, notification_id):
             'notification': notification,
         }
         return render(request, 'users_app/notification_detail.html', context)
+
+
+@api_view(['GET'])
+def get_user_connections(request):
+    if request.method == 'GET':
+        user_id = request.GET.get('user_id')
+        profile, followers, followings = UserService.get_user_profile_detail(user_id)
+        serialized_followers = SubscriptionSerializer(followers, many=True)
+        serialized_followings = SubscriptionSerializer(followings, many=True)
+        data = {
+            'followers': serialized_followers.data,
+            'followings': serialized_followings.data,
+        }
+        return Response(data, status=200)
+
+
+@api_view(['POST'])
+def get_user_names(request):
+    if request.method == 'POST':
+        user_ids = json.loads(request.body)
+        logger.debug(f'get_user_names: pre user_ids: {user_ids}')
+
+        for key, value in user_ids.items():
+            logger.debug(f'get_user_names: key: {key}, value: {value}')
+            user = UserService.get_user_name(value)
+            user_ids[key] = user
+
+        logger.debug(f'get_user_names: after user_ids: {user_ids}')
+        return Response(data=user_ids, status=200)
+
+

@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
+import posts_service.cluster_settings as cs
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,15 +26,7 @@ SECRET_KEY = 'django-insecure-u)5gkdvxft0yu$!o_in#vs6oe_)^9x+w0-l)$gon#u3$+1x-x*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    '127.0.0.1',
-    '127.0.0.3',
-    'localhost',
-    'users_service',
-    'posts_service',
-    'posts-service.servak-app.svc.cluster.local',
-]
-
+ALLOWED_HOSTS = cs.ALLOWED_HOSTS
 
 # Application definition
 
@@ -87,16 +80,7 @@ WSGI_APPLICATION = 'posts_service.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'servakdb',
-        'USER': 'postgres',
-        'PASSWORD': 'Qecz1357',
-        'HOST': 'postgres',
-        'PORT': '5432',
-    }
-}
+DATABASES = cs.DATABASES
 
 
 # Password validation
@@ -136,13 +120,13 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 
 def show_toolbar(request):
@@ -153,66 +137,11 @@ DEBUG_TOOLBAR_CONFIG = {
     "SHOW_TOOLBAR_CALLBACK": show_toolbar,
 }
 
-USERS_SERVICE_URL = '127.0.0.2:8002'
+CORS_ALLOWED_ORIGINS = cs.CORS_ALLOWED_ORIGINS
+CSRF_TRUSTED_ORIGINS = cs.CSRF_TRUSTED_ORIGINS
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '{levelname} {asctime} {module} {message}',
-            'style': '{',
-        },
-    },
-    'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': 'error.log',
-            'formatter': 'verbose',
-        },
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose',
-        },
-    },
-    'loggers': {
-        'posts_service': {
-            'handlers': ['file', 'console'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-    },
-}
+KAFKA_BROKER_URL = cs.KAFKA_BROKER_URL
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost',
-    'http://localhost:8000',
-    'http://127.0.0.1',
-    'http://posts_service',
-    'http://users_service',
-    'http://posts-service.servak-app.svc.cluster.local',
-]
+CACHES = cs.CACHES
 
-CSRF_TRUSTED_ORIGINS = [
-    'http://localhost',
-    'http://localhost:8000',
-    'http://127.0.0.1',
-    'http://posts_service',
-    'http://users_service',
-    'http://posts-service.servak-app.svc.cluster.local',
-]
-
-KAFKA_BROKER_URL = "kafka-0.kafka.servak-app.svc.cluster.local:9092"
-
-CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://redis.servak-app.svc.cluster.local:6379/1',
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-            'SERIALIZER': 'django_redis.serializers.json.JSONSerializer',
-        }
-    }
-}
+LOGGING = cs.LOGGING

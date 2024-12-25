@@ -3,7 +3,7 @@ import logging
 
 from posts_service import settings
 
-logger = logging.getLogger('posts_service')
+logger = logging.getLogger('logger')
 
 
 def produce_post_notification(user_id: int, post_id: int):

@@ -16,3 +16,8 @@ def create_post_url():
 @register.simple_tag
 def posts_by_author_url(author_id):
     return f'/api/pst/find_by_author/?author_id={author_id}'
+
+
+@register.simple_tag
+def your_chat_url():
+    return f'/chat/'

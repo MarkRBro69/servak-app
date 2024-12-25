@@ -7,7 +7,7 @@ from django.conf import settings
 from users_app.mongomodels import Notification
 from users_app.services import UserService
 
-logger = logging.getLogger('users_service')
+logger = logging.getLogger('logger')
 
 
 def extract_user_id(message):

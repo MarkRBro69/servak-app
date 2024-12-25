@@ -1,8 +1,9 @@
-import os
-
+import logging
 import requests
 
-from posts_service.settings import USERS_SERVICE_URL
+from posts_service.cluster_settings import USERS_SERVICE_URL
+
+logger = logging.getLogger('logger')
 
 
 def add_csrf_token(request, headers):
@@ -26,7 +27,7 @@ def get_authenticated_user(request):
     if urt:
         cookies['urt'] = urt
 
-    usr_url = 'users-service.servak-app.svc.cluster.local'
+    usr_url = USERS_SERVICE_URL
 
     url = f'http://{usr_url}/api/usr/get_authenticated_user/'
     response_data = requests.get(url, headers=headers, cookies=cookies)
@@ -43,4 +44,23 @@ def set_tokens(response, uat, urt):
     response.set_cookie('uat', uat, httponly=True, secure=True, samesite='Lax')
     response.set_cookie('urt', urt, httponly=True, secure=True, samesite='Lax')
     return response
+
+
+def get_user_names(posts, uat, urt):
+    user_ids = {}
+    for post in posts:
+        user_ids[post.pk] = post.author_id
+
+    logger.debug(f'get_user_names: user_ids: {user_ids}')
+    cookies = {'uat': uat, 'urt': urt}
+    usr_url = USERS_SERVICE_URL
+    url = f'http://{usr_url}/api/usr/get_user_names/'
+    response = requests.post(url, cookies=cookies, json=user_ids)
+    if response.status_code == 200:
+        post_user_dict = response.json()
+        logger.debug(f'get_user_names: post_user_dict: {post_user_dict}')
+        return post_user_dict
+    else:
+        logger.debug(f'get_user_names: Error: {response.status_code}')
+        return None
 

@@ -16,4 +16,3 @@ class Subscription(models.Model):
     followed = models.ForeignKey(Profile, related_name='subscribers', on_delete=models.CASCADE)
 
     objects = models.Manager()
-

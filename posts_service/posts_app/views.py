@@ -4,25 +4,30 @@ from datetime import datetime as dt
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.utils import timezone
-from django.views.decorators.csrf import csrf_exempt
-
 from kafka_moule.async_kafka_producer import produce_post_notification
 from posts_app.forms import *
 from posts_app.services import *
-from posts_app.utils import get_authenticated_user, set_tokens
+from posts_app.utils import get_authenticated_user, set_tokens, get_user_names
 
-
-logger = logging.getLogger('posts_service')
+logger = logging.getLogger('logger')
 
 
 def read_posts(request):
     if request.method == 'GET':
         auth_user, uat, urt = get_authenticated_user(request)
         posts = PostService.get_all_posts()
+        if not uat:
+            uat = request.COOKIES.get('uat')
+        if not urt:
+            urt = request.COOKIES.get('urt')
+        post_user_dict = get_user_names(posts, uat, urt)
+        logger.debug(f'read_posts: post_user_dict: {post_user_dict}')
+        logger.debug(f'read_posts: Type post_user_dict: {type(post_user_dict)}')
         context = {
             'title': 'Posts',
             'posts': posts,
             'auth_user_id': auth_user['id'],
+            'posts_users': post_user_dict,
         }
         response = render(request, 'posts_app/posts_show.html', context)
         if uat is not None:
@@ -39,6 +44,11 @@ def read_post(request, post_id):
         post = PostService.get_post(post_id)
         comments = CommentService.get_comments_by_post(post_id)
         comment_form = AddCommentForm()
+        if not uat:
+            uat = request.COOKIES.get('uat')
+        if not urt:
+            urt = request.COOKIES.get('urt')
+        post_user_dict = get_user_names([post], uat, urt)
         context = {
             'title': f'Post - {post_id}',
             'post': post,
@@ -46,6 +56,7 @@ def read_post(request, post_id):
             'form': comment_form,
             'button_name': 'Create comment',
             'auth_user_id': auth_user['id'],
+            'posts_users': post_user_dict,
         }
         response = render(request, 'posts_app/post_detail.html', context)
         if uat is not None:
@@ -141,9 +152,6 @@ def delete_post(request, post_id):
             response = set_tokens(response, uat, urt)
         return response
 
-    # else:
-    #     return JsonResponse({'error': f'{request.method} is unsupported '}, status=405)
-
     if request.method == 'POST':
         csrf_token = request.POST.get('csrfmiddlewaretoken')
         logger.debug(f'Body csrfmiddlewaretoken: {csrf_token}')
@@ -171,10 +179,18 @@ def find_posts_by_author(request):
     if request.method == 'GET':
         auth_user, uat, urt = get_authenticated_user(request)
         posts = PostService.get_posts_by_author(auth_user['id'])
+        if not uat:
+            uat = request.COOKIES.get('uat')
+        if not urt:
+            urt = request.COOKIES.get('urt')
+        post_user_dict = get_user_names(posts, uat, urt)
+        logger.debug(f'find_posts_by_author: post_user_dict: {post_user_dict}')
+        logger.debug(f'find_posts_by_author: Type post_user_dict: {type(post_user_dict)}')
         context = {
-            'title': 'Posts found',
+            'title': 'Posts',
             'posts': posts,
             'auth_user_id': auth_user['id'],
+            'posts_users': post_user_dict,
         }
         response = render(request, 'posts_app/posts_show.html', context)
         if uat is not None:
@@ -343,4 +359,3 @@ def delete_post_like(request, post_id):
 
     else:
         return JsonResponse({'error': f'{request.method} is unsupported '}, status=405)
-
